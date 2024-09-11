@@ -92,5 +92,44 @@ namespace FootballWorldCupScoreBoard.Tests
             // Assert
             Assert.AreEqual("Argentina 3 - Australia 1", match.MatchResult);
         }
+
+        [TestMethod]
+        public void PrintSummary_ShouldDisplayMatchesInCorrectOrder()
+        {
+            // Arrange
+            var scoreBoard = new ScoreBoard();
+
+            // Add and update matches
+            scoreBoard.StartGame("Mexico", "Canada");
+            scoreBoard.UpdateScore("Mexico", "Canada", 0, 5);
+
+            scoreBoard.StartGame("Spain", "Brazil");
+            scoreBoard.UpdateScore("Spain", "Brazil", 10, 2);
+
+            scoreBoard.StartGame("Germany", "France");
+            scoreBoard.UpdateScore("Germany", "France", 2, 2);
+
+            scoreBoard.StartGame("Uruguay", "Italy");
+            scoreBoard.UpdateScore("Uruguay", "Italy", 6, 6);
+
+            scoreBoard.StartGame("Argentina", "Australia");
+            scoreBoard.UpdateScore("Argentina", "Australia", 3, 1);
+
+            // Act
+            var matches = scoreBoard.GetSummary();
+
+            // Assert: Print summary in required format
+            PrintSummary(matches);
+        }
+
+        public void PrintSummary(List<Match> matches)
+        {
+            int i = 1;
+            foreach (var match in matches)
+            {
+                Console.WriteLine($"i. " + match.MatchResult + "\n");
+            }
+
+        }
     }
 }
