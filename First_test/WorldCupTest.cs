@@ -1,12 +1,13 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NUnit.Framework;
+using FootballWorldCupScoreBoard; // Reference your library project here
+using System;
 using FootballWorldCupScoreboard;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
-namespace First_test
+namespace FootballWorldCupScoreBoard.Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class ScoreBoardTests
     {
         [TestMethod]
         public void StartGame_ShouldAddMatchToScoreBoard()
@@ -44,12 +45,14 @@ namespace First_test
         [TestMethod]
         public void UpdateScore_ShouldModifyMatchScore()
         {
-            
+            // Arrange
             var scoreBoard = new ScoreBoard();
             scoreBoard.StartGame("Mexico", "Canada");
 
+            // Act
             scoreBoard.UpdateScore("Mexico", "Canada", 1, 2);
 
+            // Assert
             var summary = scoreBoard.GetSummary();
             Assert.AreEqual(1, summary[0].HomeScore);
             Assert.AreEqual(2, summary[0].AwayScore);
@@ -58,7 +61,7 @@ namespace First_test
         [TestMethod]
         public void GetSummary_ShouldReturnMatchesOrderedByTotalScore()
         {
-            
+            // Arrange
             var scoreBoard = new ScoreBoard();
             scoreBoard.StartGame("Mexico", "Canada");
             scoreBoard.UpdateScore("Mexico", "Canada", 0, 5);
@@ -69,11 +72,25 @@ namespace First_test
             scoreBoard.StartGame("Germany", "France");
             scoreBoard.UpdateScore("Germany", "France", 2, 2);
 
+            // Act
             var summary = scoreBoard.GetSummary();
-            
+
+            // Assert
             Assert.AreEqual("Spain", summary[0].HomeTeam);
             Assert.AreEqual("Germany", summary[2].HomeTeam);
         }
-    }
 
+        [TestMethod]
+        public void MatchResult_ShouldReturnCorrectFormat()
+        {
+            // Arrange
+            var match = new Match("Argentina", "Australia");
+
+            // Act
+            match.UpdateScore(3, 1);
+
+            // Assert
+            Assert.AreEqual("Argentina 3 - Australia 1", match.MatchResult);
+        }
+    }
 }

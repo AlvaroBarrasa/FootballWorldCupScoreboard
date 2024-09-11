@@ -46,5 +46,14 @@ namespace FootballWorldCupScoreboard
                 .ThenByDescending(m => m.StartTime)
                 .ToList();
         }
+
+        // Another way to get summary, first by date then by total score
+        public List<Match> GetSummaryByDate()
+        {
+            return _matches
+                .OrderByDescending(m => m.StartTime)
+                .ThenByDescending(m =>m.TotalScore)
+                .ToList();
+        }
     }
 }

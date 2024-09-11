@@ -30,6 +30,14 @@
         }
 
         public int TotalScore => HomeScore + AwayScore;
+
+        public string MatchResult
+        {
+            get
+            {
+                return $"{HomeTeam} {HomeScore} - {AwayTeam} {AwayScore}";
+            }
+        }
     }
 
 }
