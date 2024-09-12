@@ -1,15 +1,16 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FootballWorldCupScoreBoard; // Reference your library project here
+//using Microsoft.VisualStudio.TestTools.UnitTesting;
+using FootballWorldCupScoreBoard;
 using System;
 using FootballWorldCupScoreboard;
-using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
+using NUnit.Framework;
+//using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace FootballWorldCupScoreBoard.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class ScoreBoardTests
     {
-        [TestMethod]
+        [Test]
         public void StartGame_ShouldAddMatchToScoreBoard()
         {
             // Arrange
@@ -27,7 +28,7 @@ namespace FootballWorldCupScoreBoard.Tests
             Assert.AreEqual(0, summary[0].AwayScore);
         }
 
-        [TestMethod]
+        [Test]
         public void FinishGame_ShouldRemoveMatchFromScoreBoard()
         {
             // Arrange
@@ -42,7 +43,7 @@ namespace FootballWorldCupScoreBoard.Tests
             Assert.AreEqual(0, summary.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void UpdateScore_ShouldModifyMatchScore()
         {
             // Arrange
@@ -58,7 +59,7 @@ namespace FootballWorldCupScoreBoard.Tests
             Assert.AreEqual(2, summary[0].AwayScore);
         }
 
-        [TestMethod]
+        [Test]
         public void GetSummary_ShouldReturnMatchesOrderedByTotalScore()
         {
             // Arrange
@@ -79,8 +80,7 @@ namespace FootballWorldCupScoreBoard.Tests
             Assert.AreEqual("Spain", summary[0].HomeTeam);
             Assert.AreEqual("Germany", summary[2].HomeTeam);
         }
-
-        [TestMethod]
+        [Test]
         public void MatchResult_ShouldReturnCorrectFormat()
         {
             // Arrange
@@ -93,7 +93,7 @@ namespace FootballWorldCupScoreBoard.Tests
             Assert.AreEqual("Argentina 3 - Australia 1", match.MatchResult);
         }
 
-        [TestMethod]
+        [Test]
         public void PrintSummary_ShouldDisplayMatchesInCorrectOrder()
         {
             // Arrange
@@ -118,7 +118,7 @@ namespace FootballWorldCupScoreBoard.Tests
             // Act
             var matches = scoreBoard.GetSummary();
 
-            // Assert: Print summary in required format
+            // Assert
             PrintSummary(matches);
         }
 
@@ -127,7 +127,8 @@ namespace FootballWorldCupScoreBoard.Tests
             int i = 1;
             foreach (var match in matches)
             {
-                Console.WriteLine($"i. " + match.MatchResult + "\n");
+                Console.WriteLine(i+$". " + match.MatchResult + "\n");
+                i++;
             }
 
         }
